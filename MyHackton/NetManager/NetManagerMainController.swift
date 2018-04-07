@@ -10,12 +10,11 @@ class NetManagerMainController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper.jpg")!)
         
         //hide the back button and put a new button instead that will enable log out from the system
-        self.navigationItem.hidesBackButton = true
         let b = UIBarButtonItem(title: "התנתק", style: .plain, target: self, action: #selector(backcheck))
         navigationItem.leftBarButtonItem = b
         
         self.navigationController?.isNavigationBarHidden = false
-        navigationItem.backBarButtonItem?.title = "חזור"
+        navigationItem.title = "עמוד ראשי"
     }
     
     //logout from the system

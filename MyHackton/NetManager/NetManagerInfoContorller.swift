@@ -6,17 +6,16 @@ class NetManagerInfoController: UIViewController, UIPickerViewDelegate, UIPicker
     var array = [" ", "משתמשים", "מוצרים", "סוגי מוצרים", "כתובות", "תמונות/וידאו"]
     
     var type: String! // var to check which type to add to the system
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper.jpg")!)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
-        navigationItem.backBarButtonItem?.title = "חזור"
+        navigationItem.title = "הנהלה"
     }
     
     //// picker view functions////
@@ -46,6 +45,8 @@ class NetManagerInfoController: UIViewController, UIPickerViewDelegate, UIPicker
             case "משתמשים":
                 let next = storyboard!.instantiateViewController(withIdentifier: "net_manager_users") as! NetManagerUsersController
                 next.toDo = "add"
+                //pass the users page the title that was selected in the picker view.
+                next.pageTitle = type
                 navigationController?.pushViewController(next, animated: true)
             default:
                 break
@@ -59,6 +60,7 @@ class NetManagerInfoController: UIViewController, UIPickerViewDelegate, UIPicker
             let next = storyboard!.instantiateViewController(withIdentifier: "net_manager_table") as! NetManagerTableController
             next.type = type
             next.toDo = "update"
+            next.pageTitle = type
             navigationController?.pushViewController(next, animated: true)
         }
     }
@@ -69,6 +71,7 @@ class NetManagerInfoController: UIViewController, UIPickerViewDelegate, UIPicker
             let next = storyboard!.instantiateViewController(withIdentifier: "net_manager_table") as! NetManagerTableController
             next.type = type
             next.toDo = "delete"
+            next.pageTitle = type
             navigationController?.pushViewController(next, animated: true)
         }
     }

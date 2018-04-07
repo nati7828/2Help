@@ -115,10 +115,10 @@
 			isa = PBXGroup;
 			children = (
 				455B1809201F5CB90002E7D0 /* MainController.swift */,
-				45A41194202368BB003536A1 /* ContactUsController.swift */,
 				454A759020599BF60096A550 /* collecViewCell.swift */,
 				454A759120599BF60096A550 /* collecViewCell.xib */,
 				454A75962059A1D30096A550 /* UPCarouselFlowLayout.swift */,
+				45A41194202368BB003536A1 /* ContactUsController.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -161,11 +161,11 @@
 				901F33462059853900A73605 /* WallpaperWindow.swift */,
 				455B1807201F564E0002E7D0 /* AsyncTask.swift */,
 				456CA7FD204EA66A002D8076 /* ScannerViewController.swift */,
-				454C5D0B2065053F00035DAC /* MainScreen */,
 				90E1757220230CFB0062453D /* Server */,
-				4560D1BA202A0B30002DF7F4 /* StorageKeeper */,
+				454C5D0B2065053F00035DAC /* MainScreen */,
 				90E1757020230C430062453D /* Donators */,
 				90E1757120230C610062453D /* Delivery */,
+				4560D1BA202A0B30002DF7F4 /* StorageKeeper */,
 				D2536E8D205A85CF00D1B5E8 /* NetManager */,
 				90EBD7542035E42900A60FCF /* CollectionView */,
 				90EA35C62039994C006718D6 /* Products */,

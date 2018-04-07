@@ -82,7 +82,7 @@ class MainController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let username = usernameTF.text!
             let password = passwordTF.text!
             
-            //Server Auth
+            //Server Authentication:
             //The username and password will be sent to the server, the server will return a token and a job in array.
             //After that if the server returend data that meants the user was found and takes the user to his page.
             ServerConnections.getArrayAsync("/login", [username, password], handler: {array in
@@ -136,8 +136,6 @@ class MainController: UIViewController, UICollectionViewDelegate, UICollectionVi
         navigationController?.pushViewController(next, animated: animation)
     }
     
-    
-    
     ////collection view////
     func setCollectionViewProperties(){
         collectionView.showsHorizontalScrollIndicator = false
@@ -154,6 +152,7 @@ class MainController: UIViewController, UICollectionViewDelegate, UICollectionVi
         flowLayout.spacingMode = .fixed(spacing: 5.0)
         collectionView.collectionViewLayout = flowLayout
         
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -163,18 +162,60 @@ class MainController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! collecViewCell
         
-        let urlsRequests = URLRequest(url: cell.urls[indexPath.item])
+        let urlsRequests = URLRequest(url: cell.urls[1])
+
         cell.webView.load(urlsRequests)
-        
         cell.webView.scrollView.isScrollEnabled = false
         
-        cell.textLbl.text? = cell.screens[indexPath.row]
+        cell.textLbl.text? = cell.stories[indexPath.row]
         
         if cell.textLbl.text == ""{
-        cell.black_screen.isHidden = true
+            cell.black_screen.isHidden = true
+            cell.webView.isHidden = false
+            cell.imageView.isHidden = true
         }
         else{
+            //show the black screen and the image and hide the webview
             cell.black_screen.isHidden = false
+            cell.webView.isHidden = true
+            cell.imageView.isHidden = false
+            
+            //show the images or the webview(youtube video) on the collection view
+            if let url = URL(string: cell.urls[indexPath.row].absoluteString){
+                URLSession.shared.dataTask(with:url){ (data, response, error) in
+                    //if there is any error
+                    if let e = error{
+                        //displaying the message
+                        print("Error Occurred: \(e)")
+                    } else {
+                        //checking if the response contains an image
+                        if let imageData = data{
+                            //displaying the image
+                            DispatchQueue.main.async{
+                                //check if the image url is in the user defaults
+                                if let prefImageData = UserDefaults.standard.object(forKey: url.absoluteString){
+                                    cell.imageView.image = UIImage(data: prefImageData as! Data)
+                                    //check if the image on phone is the same as the image on the url
+                                    if prefImageData as! Data != imageData{
+                                        UserDefaults.standard.set(imageData, forKey: url.absoluteString)
+                                        cell.imageView.image = UIImage(data: prefImageData as! Data)
+                                        collectionView.reloadData()
+                                    }
+                                } else {
+                                    //if the url is not in the user defaults, download the url
+                                    UserDefaults.standard.set(imageData, forKey: url.absoluteString)
+                                    cell.imageView.image = UIImage(data: imageData)
+                                    collectionView.reloadData()
+                                }
+                            }
+                        } else {
+                            print("Image file is currupted")
+                        }
+                        
+                    }
+                    }.resume()
+            }
+            
         }
         
         return cell

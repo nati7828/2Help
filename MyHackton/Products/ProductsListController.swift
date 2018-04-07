@@ -2,8 +2,6 @@ import UIKit
 
 class ProductsListController: UIViewController , UITableViewDataSource {
     
-    //var products = [""]
-    
     @IBOutlet var productsTable: UITableView!
     //var to store later the page title
     var pageTitle : String?
@@ -21,8 +19,6 @@ class ProductsListController: UIViewController , UITableViewDataSource {
     }
     
     @IBAction func addToBasket(_ sender: UIButton) {
-        
-        //let basketPage = storyboard!.instantiateViewController(withIdentifier: "basket") as! DonationsBasketController
         let prefs = UserDefaults.standard
         var basket: [String: [String]] = [:]
         if let prefsBasket = prefs.dictionary(forKey: "basket"){
@@ -71,10 +67,14 @@ class ProductsListController: UIViewController , UITableViewDataSource {
         pageTitle = title
     }
     
-    //table view functions//
+    ////table view functions////
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionsCounts[section]
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,7 +96,6 @@ class ProductsListController: UIViewController , UITableViewDataSource {
         if let prefImageData = UserDefaults.standard.object(forKey: productsArray[count + indexPath.row][4]){
             cell.product_image.image = UIImage(data: prefImageData as! Data)
         }
-        
         
         return cell
     }
@@ -136,12 +135,6 @@ class ProductsListController: UIViewController , UITableViewDataSource {
                     }.resume()
             }
         }
-    }
-    
-    //sections//
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return sections[section]
     }
     
     var sections: [String] = []

@@ -13,12 +13,10 @@ class ContactUsController: UIViewController {
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper.jpg")!)
     }
-    
     
     @IBAction func call() {
         //call the organization
@@ -28,7 +26,6 @@ class ContactUsController: UIViewController {
         }else{
             print("number is not good")//check
         }
-        
     }
     
     @IBAction func toWaze() {
@@ -71,7 +68,6 @@ class ContactUsController: UIViewController {
         
     }
     
-    
     @IBAction func toWebsite() {
         if let url = URL(string: "https://www.2help.org.il/") {
             UIApplication.shared.open(url, options: [:])
@@ -92,6 +88,4 @@ class ContactUsController: UIViewController {
         }
     }
     
-    
-
 }

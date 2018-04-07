@@ -27,7 +27,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yso-KK-yzj">
                         <rect key="frame" x="0.0" y="0.0" width="385" height="247"/>
                         <subviews>
-                            <wkWebView contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="l23-KN-27j">
+                            <wkWebView hidden="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="l23-KN-27j">
                                 <rect key="frame" x="0.0" y="0.0" width="385" height="247"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -35,9 +35,12 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="crH-ea-fZW">
+                                <rect key="frame" x="0.0" y="0.0" width="385" height="247"/>
+                            </imageView>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HsN-iH-VdJ" userLabel="black_screen">
                                 <rect key="frame" x="0.0" y="0.0" width="385" height="247"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="דוגמא" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxj-19-dPF" userLabel="text">
                                 <rect key="frame" x="16" y="16" width="353" height="215"/>
@@ -49,19 +52,27 @@
                             </label>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="crH-ea-fZW" firstAttribute="leading" secondItem="Yso-KK-yzj" secondAttribute="leading" id="6hl-tL-gNf"/>
                             <constraint firstItem="HsN-iH-VdJ" firstAttribute="top" secondItem="Yso-KK-yzj" secondAttribute="top" id="9iF-ll-EAr"/>
                             <constraint firstAttribute="bottom" secondItem="l23-KN-27j" secondAttribute="bottom" id="F1z-Qb-Ynx"/>
                             <constraint firstItem="rxj-19-dPF" firstAttribute="centerX" secondItem="Yso-KK-yzj" secondAttribute="centerX" id="Frk-qt-OaP"/>
                             <constraint firstAttribute="trailing" secondItem="rxj-19-dPF" secondAttribute="trailing" constant="16" id="GJ0-pv-SGp"/>
                             <constraint firstAttribute="bottom" secondItem="HsN-iH-VdJ" secondAttribute="bottom" id="HFn-ug-LdH"/>
+                            <constraint firstAttribute="trailing" secondItem="crH-ea-fZW" secondAttribute="trailing" id="KYh-k7-671"/>
+                            <constraint firstItem="l23-KN-27j" firstAttribute="centerY" secondItem="Yso-KK-yzj" secondAttribute="centerY" id="KrH-NQ-8GJ"/>
+                            <constraint firstItem="crH-ea-fZW" firstAttribute="centerY" secondItem="Yso-KK-yzj" secondAttribute="centerY" id="NKR-bd-8ZP"/>
                             <constraint firstItem="HsN-iH-VdJ" firstAttribute="centerX" secondItem="Yso-KK-yzj" secondAttribute="centerX" id="NVF-Te-M6z"/>
+                            <constraint firstItem="crH-ea-fZW" firstAttribute="top" secondItem="Yso-KK-yzj" secondAttribute="top" id="NcJ-Fj-qzB"/>
                             <constraint firstAttribute="trailing" secondItem="l23-KN-27j" secondAttribute="trailing" id="Pee-fz-vem"/>
                             <constraint firstItem="rxj-19-dPF" firstAttribute="top" secondItem="Yso-KK-yzj" secondAttribute="top" constant="16" id="PjY-dB-pDn"/>
                             <constraint firstItem="rxj-19-dPF" firstAttribute="leading" secondItem="Yso-KK-yzj" secondAttribute="leading" constant="16" id="S2h-rS-jgz"/>
                             <constraint firstAttribute="bottom" secondItem="rxj-19-dPF" secondAttribute="bottom" constant="16" id="Tkg-u2-I0D"/>
+                            <constraint firstItem="crH-ea-fZW" firstAttribute="centerX" secondItem="Yso-KK-yzj" secondAttribute="centerX" id="WDe-Oi-0Pn"/>
+                            <constraint firstItem="l23-KN-27j" firstAttribute="centerX" secondItem="Yso-KK-yzj" secondAttribute="centerX" id="Zku-dC-dYm"/>
                             <constraint firstAttribute="trailing" secondItem="HsN-iH-VdJ" secondAttribute="trailing" id="ccS-lk-7nJ"/>
                             <constraint firstItem="l23-KN-27j" firstAttribute="top" secondItem="Yso-KK-yzj" secondAttribute="top" id="f9E-ww-L1E"/>
                             <constraint firstItem="l23-KN-27j" firstAttribute="leading" secondItem="Yso-KK-yzj" secondAttribute="leading" id="kEI-B0-8Ex"/>
+                            <constraint firstAttribute="bottom" secondItem="crH-ea-fZW" secondAttribute="bottom" id="qAr-CG-zXv"/>
                             <constraint firstItem="HsN-iH-VdJ" firstAttribute="centerY" secondItem="Yso-KK-yzj" secondAttribute="centerY" id="qVY-vH-0y4"/>
                             <constraint firstItem="rxj-19-dPF" firstAttribute="centerY" secondItem="Yso-KK-yzj" secondAttribute="centerY" id="qz4-gZ-TcH"/>
                             <constraint firstItem="HsN-iH-VdJ" firstAttribute="leading" secondItem="Yso-KK-yzj" secondAttribute="leading" id="xQ4-WR-jw7"/>
@@ -80,6 +91,7 @@
             <connections>
                 <outlet property="black_screen" destination="HsN-iH-VdJ" id="DOS-A6-iOZ"/>
                 <outlet property="container1" destination="Yso-KK-yzj" id="pBQ-Ua-BFd"/>
+                <outlet property="imageView" destination="crH-ea-fZW" id="NF8-zp-7Q9"/>
                 <outlet property="textLbl" destination="rxj-19-dPF" id="wOZ-dr-CAY"/>
                 <outlet property="webView" destination="l23-KN-27j" id="gWu-Ir-nhv"/>
             </connections>

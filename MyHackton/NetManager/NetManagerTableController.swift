@@ -2,17 +2,33 @@ import UIKit
 
 class NetManagerTableController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //var array = [" ", "משתמשים", "מוצרים", "סוגי מוצרים", "כתובות", "תמונות וידיו"]
+    
+    var pageTitle : String!
+    
     var user:[String]!
     var token:String!
     
+    var type: String!
+    var toDo: String!
+    
     @IBOutlet var table: UITableView!
     var tableArray: [[String]] = []
+    
     @IBOutlet var searchTextField: UITextField!
     var searchArray: [[String]] = []
+    
+    @IBAction func search(_ sender: Any) {
+        searching()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper.jpg")!)
         table.backgroundColor = UIColor.clear
+        navigationItem.title = pageTitle
         
         let prefs = UserDefaults.standard
         if let tok = prefs.string(forKey: "token"){
@@ -44,14 +60,6 @@ class NetManagerTableController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    func setTableArray(array: [[String]]?){
-        if array != nil{
-            tableArray = array!
-            searchArray = tableArray
-            table.reloadData()
-        }
-    }
-    
     func searching(){
         if searchTextField.text! != ""{
             searchArray.removeAll()
@@ -69,16 +77,21 @@ class NetManagerTableController: UIViewController, UITableViewDataSource, UITabl
         table.reloadData()
     }
     
+    func setTableArray(array: [[String]]?){
+        if array != nil{
+            tableArray = array!
+            searchArray = tableArray
+            table.reloadData()
+        }
+    }
+    
+    ////table functions////
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "netmanager_cell") as! NetManagerTableCell
-//        if(RequestsList.count > 0){
-//            cell.address.text = RequestsList[indexPath.row].getAddress()
-//            findDistanceBetweenPins(cell: cell)
-        //        }
         
         switch type {
         case "משתמשים":
@@ -113,46 +126,38 @@ class NetManagerTableController: UIViewController, UITableViewDataSource, UITabl
             user = searchArray[indexPath.row]
             deleteAlert(index: indexPath)
         case "update":
-            
             let next = storyboard!.instantiateViewController(withIdentifier: "net_manager_users") as! NetManagerUsersController
-            next.toDo = toDo
-            next.user = searchArray[indexPath.row]
+            next.toDo = toDo // copy this button's title to the next page button.
+            user = searchArray[indexPath.row] //get the user.
+            next.pageTitle = user[3] //get the user's name and show him on the next page title.
+            next.user = searchArray[indexPath.row] // move the user object to the next page.
             navigationController?.pushViewController(next, animated: true)
-            
         default:
             break
         }
     }
+    ////
     
+    //alert that will be shown when the user press the cancel button
     func deleteAlert(index: IndexPath) {
         //alert when pressing the login button
         let alert =  UIAlertController(title: "מחיקה", message: "אתה בטוח שאתה רוצה למחוק את \((table.cellForRow(at: index) as! NetManagerTableCell).lable.text!)?", preferredStyle: .alert)
-        
+      
         func deleteFromDB(alert:UIAlertAction){
             ServerConnections.getDoubleArrayAsync("/delete_user", [[self.token], self.user], handler: {array in
                 self.viewWillAppear(false)
-                let alert = UIAlertController(title: "התרעה", message: "המשתמש נמחק בהצלחה", preferredStyle: .alert)
+                let alert = UIAlertController(title: "התראה", message: "המשתמש נמחק בהצלחה", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "אישור", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             })
         }
-        
+
         alert.addAction(UIAlertAction(title: "ביטול", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "מחק", style:.default , handler: deleteFromDB))
         
         present(alert , animated: true, completion: nil)
     }
-    
-    var type: String!
-    var toDo: String!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    @IBAction func search(_ sender: Any) {
-        searching()
-    }
+
 }
 
 
