@@ -1,10 +1,12 @@
 import Foundation
 
 class ServerConnections{
+    static let HOSTURL = "http://2help-server.eu-gb.mybluemix.net"
+    //static let HOSTURL = "http://localhost:8080"
     //Connection to the server with url addon and if needed with package of string, returning an array or a dobule array of
     //String from the server.
     static func getArrayAsync(_ urlAddon: String, _ package: [String], handler: @escaping ([String]?)->()) {
-        let url = URL(string: "http://2help-server.eu-gb.mybluemix.net" + urlAddon)!
+        let url = URL(string: HOSTURL + urlAddon)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: package, options: .sortedKeys)
@@ -23,7 +25,7 @@ class ServerConnections{
     }
     
     static func getDoubleArrayAsync(_ urlAddon: String, _ package: [String], handler: @escaping ([[String]]?)->()) {
-        let url = URL(string: "http://2help-server.eu-gb.mybluemix.net" + urlAddon)!
+        let url = URL(string: HOSTURL + urlAddon)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: package, options: .sortedKeys)
@@ -42,7 +44,7 @@ class ServerConnections{
     }
     
     static func getDoubleArrayAsync(_ urlAddon: String, _ package: [[String]], handler: @escaping ([[String]]?)->()) {
-        let url = URL(string: "http://2help-server.eu-gb.mybluemix.net" + urlAddon)!
+        let url = URL(string: HOSTURL + urlAddon)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: package, options: .sortedKeys)

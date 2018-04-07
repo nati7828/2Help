@@ -68,6 +68,7 @@ class StorageKeeperProductsController: UIViewController, UITableViewDataSource, 
     
     var changedItems: [[String]] = []
     @IBAction func addItemsManager(_ sender: Any) {
+        changedItems = []
         for cell in table.visibleCells as! [ProductsTableViewCell]{
             cellItems.updateValue(cell.count, forKey: cell.name.text!)
         }

@@ -25,10 +25,6 @@ class DonationsBasketController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper.jpg")!)
-        
-        
-        
-        
     }
     
     
@@ -114,25 +110,11 @@ class DonationsBasketController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func scanBarcode(_ sender: UIButton) {
         print("in")
         let scanPage = storyboard!.instantiateViewController(withIdentifier: "scanner") as! ScannerViewController
-        //let fromDonatorMenu = storyboard?.instantiateViewController(withIdentifier: "collection")
-        
-     //   let i = navigationController?.viewControllers.index(of: self)
-        //let previousViewController = navigationController?.viewControllers[i!-1]
-        //print((previousViewController?.restorationIdentifier)!)
-//        if(previousViewController == scanPage){
-            navigationController?.pushViewController(scanPage, animated: true)
-//
-//        } else {
-//       // navigationController?.popToViewController(scanPage, animated: true)
-//           self.dismiss(animated: true, completion: nil)
-//        }
-        
-        
+        navigationController?.pushViewController(scanPage, animated: true)
     }
     
     //table view functions//
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         tableView.backgroundColor = UIColor.clear
         if(manager){
             if items.count > 0{
@@ -153,14 +135,9 @@ class DonationsBasketController: UIViewController, UITableViewDataSource, UITabl
         if let _ = prefs.string(forKey: "barcode"){
             self.navigationController?.popViewController(animated: false)
         }
-        
-        
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-      
         let cell = tableView.dequeueReusableCell(withIdentifier: "products_cell")! as! ProductsTableViewCell
         cell.manager = manager
         if manager{
