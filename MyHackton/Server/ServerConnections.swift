@@ -1,8 +1,8 @@
 import Foundation
 
 class ServerConnections{
-    static let HOSTURL = "http://2help-server.eu-gb.mybluemix.net"
-    //static let HOSTURL = "http://localhost:8080"
+    //static let HOSTURL = "http://2help-server.eu-gb.mybluemix.net"
+    static let HOSTURL = "http://localhost:8080"
     //Connection to the server with url addon and if needed with package of string, returning an array or a dobule array of
     //String from the server.
     static func getArrayAsync(_ urlAddon: String, _ package: [String], handler: @escaping ([String]?)->()) {
